@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown for My Love</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <h1 class="title">
+            Birthday Countdown for My Love 
+            <span class="reset-heart" id="resetButton" title="Reset Countdown">❤️</span>
+        </h1>
+        <p class="subtitle">Every moment until your special day is precious</p>
+
+        <div class="date-input" id="dateInput">
+            <div>
+                <input type="date" id="birthdayDate" placeholder="Select Birthday Date">
+                <button onclick="startCountdown()">Start Countdown</button>
+            </div>
+        </div>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+
+        <div class="birthday-message" id="birthdayMessage">
+            <h2>🎉 Happy Birthday, Beautiful! 🎉</h2>
+            <p>On this special day, I want you to know how much you mean to me.</p>
+            <p>Your smile lights up my world, your laughter is my favorite sound,</p>
+            <p>and your love makes every day feel like a celebration.</p>
+            <p>You are my sunshine, my heart, and my everything.</p>
+            <p>Here's to another year of amazing memories together!</p>
+            <button class="wish-button" onclick="showPhotos()">See Our Memories ❤️</button>
+        </div>
+
+        <div class="photo-gallery" id="photoGallery">
+            <div class="photo-item">
+                <img src="first-temple.jpg" alt="Meeting at Thirupparankundram Murugan Temple" style="width: 100%; height: clamp(150px, 40vw, 200px); object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <div class="photo-caption">Our first meeting at Thirupparankundram Murugan Temple 🛕</div>
+            </div>
+            <div class="photo-item">
+                <img src="park-evening.jpg" alt="Evening at Thiruparankundram Park" style="width: 100%; height: clamp(150px, 40vw, 200px); object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <div class="photo-caption">Evening stroll at Thiruparankundram Park 🌳</div>
+            </div>
+            <div class="photo-item">
+                <img src="solaimalai-cinema.jpg" alt="Solaimalai Cinemas" style="width: 100%; height: clamp(150px, 40vw, 200px); object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <div class="photo-caption">Morning/Afternoon at Solaimalai Cinemas 🎥</div>
+            </div>
+            <div class="photo-item">
+                <img src="madurai-city-bus.jpg" alt="Traveling by city bus around Madurai" style="width: 100%; height: clamp(150px, 40vw, 200px); object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <div class="photo-caption">Traveling around Madurai on the city bus 🚌</div>
+            </div>
+            <div class="photo-item">
+                <img src="hotel-bakery.jpg" alt="Eating at hotel and bakery" style="width: 100%; height: clamp(150px, 40vw, 200px); object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <div class="photo-caption">Tasting goodies at our favorite hotel & bakery 🍰</div>
+            </div>
+        </div>
+
+        <div class="final-message" id="finalMessage">
+            <h3>I Love You More Than Words Can Say 💕</h3>
+            <p>You are my today and all of my tomorrows.</p>
+            <p>Happy Birthday, my love! 🎂✨</p>
+        </div>
+    </div>
+
+    <footer>
+        Created with ❤️ by Meganathan © 2025
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
