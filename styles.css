@@ -30,6 +30,13 @@ body {
     padding-bottom: 60px;
 }
 
+body,
+.container,
+.countdown-item,
+.heart {
+  will-change: transform, opacity;
+}
+
 /* NIGHT THEME (6pm-6am) - Black & Blue */
 body.night-theme {
     background: linear-gradient(-45deg, #000428, #004e92, #1a1a2e, #16213e, #0f3460, #000000);
@@ -1091,4 +1098,50 @@ body.day-theme footer {
     input[type="url"] {
         font-size: 16px;
     }
+}
+
+/* ===================
+   Mobile Optimizations
+   =================== */
+
+@media (max-width: 768px) {
+  /* Simplify background animations */
+  body.night-theme,
+  body.day-theme {
+    background-size: 200% 200%;
+    animation: none; /* stop gradient shifting on mobile */
+    transition: none;
+  }
+
+  /* Reduce blur for better GPU performance */
+  .container {
+    backdrop-filter: none; /* disables costly blur */
+    box-shadow: 0 4px 12px rgba(0, 100, 200, 0.2); /* lighter shadow */
+  }
+
+  /* Stop twinkle/star/petal animations if present */
+  body.night-theme::before,
+  body.night-theme::after,
+  body.day-theme::before,
+  body.day-theme::after {
+    animation: none;
+  }
+
+  /* Adjust heart animation (less CPU) */
+  .heart {
+    animation-duration: 10s; /* slower */
+    opacity: 0.6; /* lighter rendering */
+  }
+
+  /* Remove pulse/scale effects */
+  .countdown-item,
+  .theme-indicator {
+    animation: none;
+  }
+
+  /* Optional: hide sparkle/droplet effects */
+  .sparkle,
+  .droplet {
+    display: none !important;
+  }
 }
