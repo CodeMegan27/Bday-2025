@@ -31,23 +31,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize the application based on stored state
 function initializeApp() {
-    // Set default date (tomorrow) if no date is stored
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const defaultDate = tomorrow.toISOString().split('T')[0];
+    // Always use fixed date 09-09-2025
+    const defaultDate = '2025-09-09';
+    document.getElementById('birthdayDate').value = defaultDate;
 
-    const storedDate = localStorage.getItem(STORAGE_KEYS.BIRTHDAY_DATE);
-    document.getElementById('birthdayDate').value = storedDate || defaultDate;
+    // Never restore any user-changed date
+    const storedDate = defaultDate;
 
     // Check if countdown was previously active
-    const isActive = localStorage.getItem(STORAGE_KEYS.COUNTDOWN_ACTIVE) === 'true';
-    const currentStage = localStorage.getItem(STORAGE_KEYS.CURRENT_STAGE) || STAGES.INITIAL;
+    const isActive = true; // <-- always true, countdown always runs
+    const currentStage = localStorage.getItem(STORAGE_KEYS.CURRENT_STAGE) || STAGES.COUNTDOWN;
 
-    if (isActive && storedDate) {
-        restoreCountdownState(storedDate, currentStage);
-    }
+    restoreCountdownState(storedDate, currentStage);
 }
+
 
 // Restore the countdown state after page refresh
 function restoreCountdownState(dateString, stage) {
@@ -97,17 +94,12 @@ function restoreCountdownState(dateString, stage) {
 
 // Start the countdown when button is clicked
 function startCountdown() {
-    const dateInput = document.getElementById('birthdayDate').value;
-    if (!dateInput) {
-        alert('Please select a birthday date!');
-        return;
-    }
-
-    const birthdayDate = new Date(dateInput).getTime();
+    const fixedDate = '2025-09-09';
+    const birthdayDate = new Date(fixedDate).getTime();
     const now = new Date().getTime();
 
-    // Store the date and activate countdown
-    localStorage.setItem(STORAGE_KEYS.BIRTHDAY_DATE, dateInput);
+    // Force correct storage (optional, but harmless)
+    localStorage.setItem(STORAGE_KEYS.BIRTHDAY_DATE, fixedDate);
     localStorage.setItem(STORAGE_KEYS.COUNTDOWN_ACTIVE, 'true');
     localStorage.setItem(STORAGE_KEYS.CURRENT_STAGE, STAGES.COUNTDOWN);
 
@@ -121,6 +113,7 @@ function startCountdown() {
 
     startCountdownTimer(birthdayDate);
 }
+
 
 // Start the actual countdown timer
 function startCountdownTimer(birthdayDate) {
@@ -246,65 +239,9 @@ function setupResetButton() {
 
 // Reset the countdown to initial state
 function resetCountdown() {
-    // Show confirmation dialog
-    const confirmReset = confirm('Are you sure you want to reset the countdown? This will restart everything.');
-
-    if (!confirmReset) {
-        return;
-    }
-
-    // Clear all intervals
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-    }
-    if (heartsInterval) {
-        clearInterval(heartsInterval);
-    }
-
-    // Clear localStorage
-    Object.values(STORAGE_KEYS).forEach(key => {
-        localStorage.removeItem(key);
-    });
-
-    // Reset photo index
-    photoIndex = 0;
-
-    // Hide all sections with fade out animation
-    const sections = ['countdown', 'birthdayMessage', 'photoGallery', 'finalMessage'];
-    sections.forEach(sectionId => {
-        const section = document.getElementById(sectionId);
-        if (section.style.display !== 'none') {
-            section.classList.add('fade-out');
-        }
-    });
-
-    // Clear hearts container
-    document.getElementById('hearts').innerHTML = '';
-
-    // Reset all sections after animation
-    setTimeout(() => {
-        sections.forEach(sectionId => {
-            const section = document.getElementById(sectionId);
-            section.style.display = 'none';
-            section.classList.remove('fade-out');
-        });
-
-        // Hide all photos
-        document.querySelectorAll('.photo-item').forEach(photo => {
-            photo.style.display = 'none';
-        });
-
-        // Show initial date input
-        document.getElementById('dateInput').style.display = 'block';
-
-        // Reset date to tomorrow
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        document.getElementById('birthdayDate').value = tomorrow.toISOString().split('T')[0];
-
-    }, 500);
+    alert('Countdown is locked to 09-09-2025. Reset is disabled.');
 }
+
 
 // Prevent accidental page refresh
 window.addEventListener('beforeunload', function(e) {
@@ -439,7 +376,6 @@ function handlePointerMove(evt) {
         }
     });
 }
-
 // Attach listeners for both mouse and touch events
 window.addEventListener('mousemove', handlePointerMove);
 window.addEventListener('touchmove', handlePointerMove, { passive: true });
