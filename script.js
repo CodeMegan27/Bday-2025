@@ -22,6 +22,10 @@ const STAGES = {
     FINAL: 'final'
 };
 
+const container = document.querySelector('.sunflower-drops');
+container.innerHTML = '';
+
+
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
@@ -208,6 +212,35 @@ function createHearts() {
         }, 6000);
     }, 300);
 }
+
+// Create sunflower drops only in day mode
+function createSunflowerDrops() {
+  const container = document.querySelector('.sunflower-drops');
+  if (!container) return;
+
+  const drop = document.createElement('div');
+  drop.classList.add('drop');
+  drop.textContent = '🌻'; // sunflower emoji
+  drop.style.left = Math.random() * 100 + 'vw';
+  drop.style.animationDuration = 5 + Math.random() * 5 + 's'; // random fall speed
+  drop.style.fontSize = 20 + Math.random() * 15 + 'px'; // random size
+
+  container.appendChild(drop);
+
+  // Remove drop after animation ends
+  setTimeout(() => {
+    drop.remove();
+  }, 10000);
+}
+
+// Only run sunflower drops in day theme
+setInterval(() => {
+  if (document.body.classList.contains('day-theme')) {
+    createSunflowerDrops();
+  }
+}, 500); // every 0.5s create a new drop
+
+
 
 // Setup the hidden reset button functionality
 function setupResetButton() {
